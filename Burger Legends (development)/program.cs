@@ -16,15 +16,18 @@ namespace BurgerLegends
 
             Rectangle player = new Rectangle(0, 551, 59, 93);
 
-            Rectangle ing1 = new Rectangle(0, 0, 33, 33);
+            Rectangle lettuce = new Rectangle(0, 0, 33, 33);
 
-            Texture2D chef = Raylib.LoadTexture("C:\\Users\\shake\\Pictures\\chef.png");
+            int lettuceTotal = 0;
+
+            Texture2D lettuceTex = Raylib.LoadTexture("C:\\Users\\pc\\Pictures\\lettuce.png");
+            Texture2D chef = Raylib.LoadTexture("C:\\Users\\pc\\Pictures\\chef.png");
 
             if(!gameOver)
             {
                 bool collisionWithLettuce = false;
 
-                ing1.X = random.Next(480);
+                lettuce.X = random.Next(480);
 
                 while (!Raylib.WindowShouldClose())
                 {
@@ -33,18 +36,20 @@ namespace BurgerLegends
 
                     Raylib.DrawRectangleLinesEx(player, 1, Color.Black);
 
-                    ing1.Y += 1;
+                    lettuce.Y += 1;
 
-                    Raylib.DrawRectangleLinesEx(ing1, 1, Color.Green);
+                    Raylib.DrawRectangleLinesEx(lettuce, 1, Color.Green);
 
-                    if(Raylib.CheckCollisionRecs(player, ing1)||ing1.Y >= Raylib.GetScreenHeight())
+                    if(Raylib.CheckCollisionRecs(player, lettuce)||lettuce.Y >= Raylib.GetScreenHeight())
                     {
                         collisionWithLettuce = true;
-                        ing1.Y = 0;
-                        ing1.X = random.Next(457);
+                        lettuce.Y = 0;
+                        lettuce.X = random.Next(457);
+                        lettuceTotal += 1;
                     }
 
                     Raylib.DrawTextureEx(chef, new Vector2(player.X - 7, player.Y - 23), 0, 0.5f, Color.White);
+                    Raylib.DrawTextureEx(lettuceTex, new Vector2(lettuce.X - 7, lettuce.Y - 1), 0, 1.1f, Color.White);
 
                     if (Raylib.IsKeyDown(KeyboardKey.A))
                     {
@@ -64,6 +69,7 @@ namespace BurgerLegends
                         player.X = Raylib.GetScreenWidth() - player.Width;
                     }
 
+                    Raylib.DrawText("Lettuce: " + lettuceTotal, 7, 7, 17, Color.Black);
                     Raylib.EndDrawing();
                 }
                 Raylib.UnloadTexture(chef);
