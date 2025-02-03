@@ -22,8 +22,9 @@ namespace BurgerLegends
             int lettuceTotal = 0;
             int tomatoTotal = 0;
 
-            Texture2D lettuceTex = Raylib.LoadTexture("C:\\Users\\Shake\\Pictures\\lettuce.png");
-            Texture2D chef = Raylib.LoadTexture("C:\\Users\\shake\\Pictures\\chef.png");
+            Texture2D lettuceTex = Raylib.LoadTexture("C:\\Users\\\\Pictures\\lettuce.png");
+            Texture2D chef = Raylib.LoadTexture("C:\\Users\\\\Pictures\\chef.png");
+            Texture2D tomatoTex = Raylib.LoadTexture("C:\\Users\\\\Pictures\\tomato.png");
 
             if(!gameOver)
             {
@@ -31,7 +32,7 @@ namespace BurgerLegends
                 bool collisionWithTomato = false;
 
                 lettuce.X = random.Next(Raylib.GetScreenWidth()-33);
-                tomato.X = random.Next(Raylib.GetScreenWidth() - 33);
+                tomato.X = random.Next(Raylib.GetScreenWidth()-37);
 
                 while (!Raylib.WindowShouldClose())
                 {
@@ -79,6 +80,7 @@ namespace BurgerLegends
 
                     Raylib.DrawTextureEx(chef, new Vector2(player.X - 7, player.Y - 23), 0, 0.5f, Color.White);
                     Raylib.DrawTextureEx(lettuceTex, new Vector2(lettuce.X - 7, lettuce.Y - 1), 0, 1.1f, Color.White);
+                    Raylib.DrawTextureEx(tomatoTex, new Vector2(tomato.X-7, tomato.Y),0,0.21f,Color.White);
 
                     if (Raylib.IsKeyDown(KeyboardKey.A))
                     {
@@ -101,21 +103,23 @@ namespace BurgerLegends
                     //debug
 
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Lettuce (X): " + lettuce.X);
-                    Console.WriteLine("Lettuce (Y): " + lettuce.Y);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Player: (x)" + player.X);
                     Console.WriteLine("Player: (y)" + player.Y);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Lettuce (X): " + lettuce.X);
+                    Console.WriteLine("Lettuce (Y): " + lettuce.Y);
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Tomato (X): " + tomato.X);
+                    Console.WriteLine("Tomato (Y): " + tomato.Y);
 
                     Raylib.DrawText("Lettuce: " + lettuceTotal, 7, 7, 17, Color.Black);
+                    Raylib.DrawText("Tomato: " + tomatoTotal, 3, 21, 17, Color.Black);
                     Raylib.EndDrawing();
                 }
                 Raylib.UnloadTexture(chef);
                 Raylib.CloseWindow();
             }
         }
-              
     }
 }
